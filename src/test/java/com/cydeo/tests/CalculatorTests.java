@@ -12,23 +12,22 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class CalculatorTest {
+public class CalculatorTests {
 
     @Test
     public void calculatorAddTest() throws MalformedURLException, InterruptedException {
-
-        // DesiredCapabilities
+        //DesiredCapabilities
         DesiredCapabilities caps = new DesiredCapabilities();
-        // caps.setCapability("deviceName", "Pixel33");
-        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel33");
+        // caps.setCapability("deviceName", "Pixel 3");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 3");
         caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
-        caps.setCapability(MobileCapabilityType.APP, "https://cybertek-appium.s3.amazonaws.com/calculator.apk");
+        caps.setCapability(MobileCapabilityType.APP, "https://cybertek-appium.s3.amazonaws.com/calculator.apk" );
 
-        // Set URL for the appium server
+        //set URL for the appium server
         URL url = new URL("http://localhost:4723/wd/hub");
 
-        // Launch appiumDriver
+        //launch appiumDriver
         AppiumDriver<MobileElement> driver = new AndroidDriver<MobileElement>(url, caps);
 
         // System.out.println(driver.getTitle());
@@ -37,14 +36,14 @@ public class CalculatorTest {
         Assertions.assertEquals("android", driver.getPlatformName());
 
         Thread.sleep(4000);
+        //locate AC element on calculator using AccessibilityId("clear")
+        MobileElement clearElem = driver.findElement(MobileBy.AccessibilityId("clear"));
 
-        // Locate AC element on calculator using AccessibilityId("clear")
-        MobileElement clearElement = driver.findElement(MobileBy.AccessibilityId("clear"));
-
-        System.out.println("Text of element: " + clearElement.getText());
-        Assertions.assertTrue(clearElement.isDisplayed());
+        System.out.println("Text of elem: " + clearElem.getText());
+        Assertions.assertTrue(clearElem.isDisplayed());
 
         //close the app
         driver.closeApp();
+
     }
 }
