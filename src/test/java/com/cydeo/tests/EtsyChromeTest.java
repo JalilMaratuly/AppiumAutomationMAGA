@@ -32,19 +32,16 @@ public class EtsyChromeTest extends WebTestBase {
         String password = ConfigurationReader.getProperty("password");
 
         driver.get("https://www.etsy.com");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        WebElement signIn = driver.findElement(By.xpath("//a[@class='wt-btn wt-btn--small wt-btn--transparent wt-btn--icon wt-btn--transparent-flush-right']"));
+        WebElement signIn = driver.findElement(By.xpath("//span[contains(text(),'Sign in')]/.."));
         signIn.click();
 
-        WebElement emailInput = driver.findElement(By.id("join_neu_email_field"));
-        emailInput.sendKeys(email + Keys.ENTER);
+        WebElement userNameField = driver.findElement(By.name("email"));
+        userNameField.sendKeys(email + Keys.ENTER);
 
         Thread.sleep(3000);
 
-        WebElement passwordInput = driver.findElement(By.id("join_neu_password_field"));
-        passwordInput.sendKeys(password + Keys.ENTER);
-
-        Thread.sleep(3000);
+        WebElement passwordField = driver.findElement(By.name("password"));
+        passwordField.sendKeys(password + Keys.ENTER);
     }
 }
